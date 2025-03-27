@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Calculadora from './components/calculadora';
+import Footer from './components/footer';
 import './reset.css';
 
 const AppContainer = styled.div`
@@ -9,6 +10,7 @@ const AppContainer = styled.div`
   display: flex;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
+  flex-direction: column;
   height: 100vh;
   justify-content: center;
 `
@@ -17,6 +19,7 @@ function App() {
   return (
     <AppContainer>
       <Calculadora />
+      <Footer />
     </AppContainer>
   )
 }

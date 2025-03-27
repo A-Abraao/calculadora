@@ -3,14 +3,13 @@ import { teclas } from "./teclas";
 import { useState } from "react";
 
 const TecladoContainer = styled.section`
-    height: 480px;
-    padding: 10px;
+   height: auto; /* Ajustável conforme o conteúdo */
+    padding: 0px;
     width: 380px;
-    display: grid;
-    margin-top:12px;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center; /* Alinha os itens */
 `;
 
 const Tecla = styled.button`
@@ -19,20 +18,40 @@ const Tecla = styled.button`
     color: white;
     font-family: "Poppins", sans-serif;
     font-size: 26px;
-    width: 30px;
-    height: 30px;
+    width: 70px; /* Largura ajustável */
+    height: 70px; /* Altura ajustável */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 
     &:hover {
-        color: #4169E1;
-        font-size: 32px;
+        color: rgba(255, 255, 255, 0.4)
     }
 `;
 
-function Teclado( {setParagrafoValor} ) {
+const TeclaResultado = styled.button`
+    background: linear-gradient(to right, #5D3FD3, #4169E1);
+    border: none;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 28px;
+    width: 80px;
+    height: 70px;
+    display: flex;
+    position: relative;
+    left: 7px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+    &:hover {
+        color: rgba(255, 255, 255, 0.4)
+    }
+    `;
+
+
+function Teclado( {setParagrafoValor, animarResultado,setAnimarResultado} ) {
     let [inputValor, setInputValor] = useState("");
 
     function mudarValorInput(novoValor) {
@@ -45,36 +64,57 @@ function Teclado( {setParagrafoValor} ) {
     }
 
     function deletar() {
+        setAnimarResultado(false);
         mudarValorInput(inputValor = "");
-        mudaValorParagrafo(`= 0`)
+        mudaValorParagrafo(`0`)
     }
 
     function porcentagem() {
-        mudarValorInput(inputValor / 100 +  "*")
+        if (animarResultado !=true) { 
+            if (isNaN(inputValor / 100)) {
+                setAnimarResultado(true)
+                setParagrafoValor("Pode não man..")
+            } else {
+                mudarValorInput(inputValor / 100 +  "*")
+                
+            }
+        }
     }
 
     function inverter() {
-        if (isNaN(inputValor *= -1)) {
-            mudaValorParagrafo("Bagulho só inverte numeros :(")
-        } else {
-            mudaValorParagrafo(inputValor)
+        if (inputValor != "" || inputValor != 0) {
+            if (animarResultado !=true) {
+                if (isNaN(inputValor *= -1)) {
+                    mudaValorParagrafo("somente numero")
+                    setAnimarResultado(true)
+                } else {
+                    mudarValorInput(inputValor)
+                }
+                
+            }
         }
-    
+        
     }
 
     function apagar() {
-        mudarValorInput(inputValor.slice(0, -1))
+        if (animarResultado != true) {
+            mudarValorInput(inputValor.slice(0, -1))
+        }
     }
 
     function escrever(texto) {
-        mudarValorInput(inputValor + texto);
+        if (animarResultado !=true) {
+            mudarValorInput(inputValor + texto);
+        }
     }
 
     function mostrarResultado() {
         try {
-            mudaValorParagrafo(eval(inputValor).toString());
+            setParagrafoValor(eval(inputValor).toString());
+            setAnimarResultado(true);
         } catch {
-            mudaValorParagrafo("Deu certo não..");
+            setParagrafoValor("Deu certo não..");
+            setAnimarResultado(true);
         }
     }
 
@@ -147,6 +187,9 @@ function Teclado( {setParagrafoValor} ) {
                         {tecla.valor}
                     </Tecla>
                 ))}
+
+                <TeclaResultado onClick={() => mostrarResultado()}>=</TeclaResultado>
+
         </TecladoContainer>
     );
 }

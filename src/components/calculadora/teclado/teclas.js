@@ -74,8 +74,4 @@ export const teclas = [
         valor: "DEL"
     },
     
-    {
-        valor: "="
-    },
-    
 ]

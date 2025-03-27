@@ -1,12 +1,14 @@
+import React, { useState, useRef, useEffect } from 'react';
 import styled from "styled-components";
+import gsap from "gsap";
 
 const TopoContainer = styled.section`
-    background: #4F46E5;
-    height: 130px;
+    background: linear-gradient(to right, #007BFF, #5D3FD3);
+    height: auto;
     display: flex;
     flex-direction: column;
     padding: 10px;
-    width: 380px;;
+    width: auto;
 
     .div__titulo {
         text-align: center;
@@ -22,36 +24,52 @@ const TopoContainer = styled.section`
     }
     
     .input__resultado {
-        background: #4F46E5;
+        background: transparent;
         border: none;
-        border-bottom: 1px  solid  rgba(217, 217, 217, 0.4);
+        border-bottom: 1px solid rgba(217, 217, 217, 0.4);
         color: white;
         font-size: 48px;
         height: 67px;
         padding-left: 8px;
+        letter-spacing: 12px;
         width: 235px;
+        transition: all 0.3s ease;
     }
 
     .resultado__paragrafo {
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 25px;
+        font-size: 20px;
+        transition: all 0.3s ease;
+        opacity: 0.7;
+        margin-right: 8px; 
+        font-weight: 300;
     }
+`;
 
-    
-`
+function Topo({ paragrafoValor, animarResultado }) {
+    const inputRef = useRef(null);
+    const paragrafoRef = useRef(null);
 
-function Topo({ paragrafoValor }) {
+    useEffect(() => {
+        if (animarResultado) {
+            gsap.to(inputRef.current, { scale: 0.7, opacity: 0.5, duration: 0.2 });
+            gsap.to(paragrafoRef.current, { scale: 1.3, opacity: 1, duration: 0.2 });
+        } else {
+            gsap.to(inputRef.current, { scale: 1, opacity: 1, duration: 0.7 });
+            gsap.to(paragrafoRef.current, { scale: 1, opacity: 0.7, duration: 0.7 });
+        }
+    }, [animarResultado]);
+
     return (
         <TopoContainer>
             <div className="div__titulo">
                 <h2 className="calculadora__titulo">calculadoras Stark</h2>
             </div>
             <div className="div__resultado">
-                <input className="input__resultado"  id="inputResultado"  disabled/>
-                <p className="resultado__paragrafo" id="resultadoParagrafo">{ paragrafoValor }</p>
+                <input ref={inputRef} className="input__resultado" id="inputResultado" disabled/>
+                <p ref={paragrafoRef} className="resultado__paragrafo" id="resultadoParagrafo">{paragrafoValor}</p>
             </div>
         </TopoContainer>
-    )
+    );
 }
 
-export default Topo
+export default Topo;
