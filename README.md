@@ -12,5 +12,4 @@ O método de produção das Calculadoras Stark varia, porém geralmente elas sã
 
 # Powered By
 
-## React JS
-![logo do react](https://miro.medium.com/v2/resize:fit:1400/1*MF5V_dkybUTcfzwHFh0VSw.jpeg)
+![logo do react](src/components/image.png)
