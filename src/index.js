@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
 import './reset.css'
@@ -30,8 +31,10 @@ code {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <App />
+    <BrowserRouter basename="/calculadora">
+      <GlobalStyle />
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 

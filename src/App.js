@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Calculadora from './components/calculadora';
+import { BrowserRouter } from "react-router-dom";
 import Footer from './components/footer';
 import './reset.css';
 
