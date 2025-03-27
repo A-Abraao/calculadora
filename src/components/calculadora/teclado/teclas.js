@@ -71,7 +71,7 @@ export const teclas = [
     },
     
     {
-        valor: "()"
+        valor: "DEL"
     },
     
     {
