@@ -12,8 +12,13 @@ O método de produção das Calculadoras Stark varia, porém geralmente elas sã
 
 # Powered By
 
-| ![logo do react](src/components/image.png) | ![logo do VS Code](src/components/image4.png) | ![logo do figma](src/components/image5.png) |
+![logo do react](src/components/image.png) 
+![logo do VS Code](src/components/image4.png) 
+![logo do figma](src/components/image5.png)
 
+# Link do Figma aqui rapá 👇
+
+https://www.figma.com/proto/llwOYiZcHYgCHCfBwN0bVX/Untitled?t=UrQjJrNy92lMFRKE-1
 
 
 
